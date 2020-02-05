@@ -13,4 +13,11 @@
     ;(testing "addition with multiple coll of diff arity"
     ;  (is (= [11] (map' + [1 2 3] [10])))))
     )
+
+  (testing "filter"
+    (testing "even with single coll"
+      (are [x y] (= x y)
+                 [2 4] (filter' even? [1 2 3 4])
+                 [] (filter' even? [1 3])))
+    )
   )

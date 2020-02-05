@@ -12,8 +12,7 @@
   (loop [coll (first colls) result []]
     (if (empty? coll)
       result
-      (do
-        (recur (rest coll) (conj result (f (first coll))))))))
+      (recur (rest coll) (conj result (f (first coll)))))))
 
 (defn filter'
   "Implement a non-lazy version of filter that accepts a
@@ -22,8 +21,12 @@
   {:level        :easy
    :use          '[loop recur]
    :dont-use     '[filter]
-   :implemented? false}
-  [pred coll])
+   :implemented? true}
+  [pred collec]
+  (loop [coll collec result []]
+    (if (empty? coll)
+      result
+      (recur (rest coll) (if (pred (first coll)) (conj result (first coll)) result)))))
 
 (defn reduce'
   "Implement your own multi-arity version of reduce
