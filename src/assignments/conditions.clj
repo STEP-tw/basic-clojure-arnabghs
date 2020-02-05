@@ -55,13 +55,13 @@
           ))
 
 (defn filter-out
-  [elems coll]
-  (filter #(some #{%} elems) coll))
+  [required-elems coll]
+  (filter #(some #{%} required-elems) coll))
 
-(defn contain-collection
-  [elems coll]
+(defn check-single-occurance-in-correct-order
+  [ordered-set coll]
   (when
-    (= 1 (count (filter #(= % elems) (partition (count elems) 1 (filter-out elems coll)))))
+    (= 1 (count (filter #(= % ordered-set) (partition (count ordered-set) 1 (filter-out ordered-set coll)))))
     true
     ))
 
@@ -76,7 +76,7 @@
    :use          '[condp filter]
    :alternates   '[if cond]
    :implemented? true}
-  [coll] (condp contain-collection coll
+  [coll] (condp check-single-occurance-in-correct-order coll
            [1 3] :wonder-woman
            [:a :b :c] :durga
            [[2 3] [4 5]] :cleopatra
