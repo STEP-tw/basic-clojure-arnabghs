@@ -54,18 +54,22 @@
     (is (= :universe (five-point-someone 0 4))))
   )
 
-;(deftest conditions-apply-test
-;  (testing "single occurrence of 1 and 3 in that order"
-;    (is (= :wonder-woman (conditions-apply [1 3]))))
-;  (testing "collection has a single occurrence of :a :b and :c in that order"
-;    (is (= :durga (conditions-apply [:a :b :c]))))
-;  (testing "collection has a single occurrence of [2 3] and [4 5] in that order"
-;    (is (= :cleopatra (conditions-apply [[2 3] [4 5]]))))
-;  (testing "order is wrong"
-;    (is (= :tuntun (conditions-apply [3 1]))))
-;  (testing "multiple occurance"
-;    (is (= :tuntun (conditions-apply [1 3 2 1 3]))))
-;  )
+(deftest conditions-apply-test
+  (testing "single occurrence of 1 and 3 in that order"
+    (is (= :wonder-woman (conditions-apply [1 3]))))
+  (testing "single occurrence of 1 and 3 in that order 2"
+    (is (= :wonder-woman (conditions-apply '(1 2 3 4 5)))))
+  (testing "collection has a single occurrence of :a :b and :c in that order"
+    (is (= :durga (conditions-apply [:a :b :c]))))
+  (testing "collection has a single occurrence of [2 3] and [4 5] in that order"
+    (is (= :cleopatra (conditions-apply [[2 3] [4 5]]))))
+  (testing "order is wrong"
+    (is (= :tuntun (conditions-apply [3 1]))))
+  (testing "multiple occurance"
+    (is (= :tuntun (conditions-apply [1 3 2 1 3]))))
+  (testing "multiple occurance 2"
+    (is (= :tuntun (conditions-apply '(1 2 3 4 1 5 3)))))
+  )
 
 (deftest repeat-and-truncate-test
   (testing "repeat and truncate true"

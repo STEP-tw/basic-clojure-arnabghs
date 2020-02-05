@@ -54,6 +54,18 @@
           :else :universe
           ))
 
+(defn filter-out
+  [elems coll]
+  (filter #(some #{%} elems) coll))
+
+(defn contain-collection
+  [elems coll]
+  (when
+    (= 1 (count (filter #(= % elems) (partition (count elems) 1 (filter-out elems coll)))))
+    true
+    ))
+
+
 (defn conditions-apply
   "Given a collection of any length, returns:
   :wonder-woman if collection has a single occurrence of 1 and 3 in that order
@@ -64,7 +76,12 @@
    :use          '[condp filter]
    :alternates   '[if cond]
    :implemented? true}
-  [coll] )
+  [coll] (condp contain-collection coll
+           [1 3] :wonder-woman
+           [:a :b :c] :durga
+           [[2 3] [4 5]] :cleopatra
+           :tuntun
+           ))
 
 (defn repeat-and-truncate
   "Given coll and options to repeat and truncate
@@ -128,4 +145,5 @@
   [coll] (as-> coll col
                (map inc col)
                (concat (reverse col) [0] col)
-               ))
+               )
+  )
