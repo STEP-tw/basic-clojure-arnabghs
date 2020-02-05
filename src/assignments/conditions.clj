@@ -54,17 +54,10 @@
           :else :universe
           ))
 
-(defn filter-out
-  [required-elems coll]
-  (filter #(some #{%} required-elems) coll))
-
 (defn check-single-occurance-in-correct-order
   [ordered-set coll]
-  (when
-    (= 1 (count (filter #(= % ordered-set) (partition (count ordered-set) 1 (filter-out ordered-set coll)))))
-    true
-    ))
-
+  (= ordered-set (filter (set ordered-set) coll))
+  )
 
 (defn conditions-apply
   "Given a collection of any length, returns:
