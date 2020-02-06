@@ -8,15 +8,16 @@
    :use          '[loop recur]
    :dont-use     '[map]
    :implemented? true}
-  [f & colls]
-  (loop [coll (first colls) result []]
-    (if (empty? coll)
+  [f & collecs]
+  (loop [colls collecs result []]
+    (if (some empty? colls)
       result
-      (recur (rest coll) (conj result (f (first coll)))))))
+      (recur (for [x colls] (rest x)) (conj result (apply f (for [x colls] (first x)))))))
+  )
 
 (defn filter'
   "Implement a non-lazy version of filter that accepts a
-  predicate function and a collection. The output
+  predicate function a  nd a collection. The output
   should be consistent with clojure.core/filter"
   {:level        :easy
    :use          '[loop recur]
@@ -36,7 +37,7 @@
    :use          '[loop recur]
    :dont-use     '[reduce]
    :implemented? false}
-  ([f coll])
+  ([f coll] ())
   ([f init coll]))
 
 (defn count'
