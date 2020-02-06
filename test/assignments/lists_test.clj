@@ -44,3 +44,14 @@
   (testing "counting string"
     (is (= 7 (count' "Germany"))))
   )
+
+(deftest reverse-test
+  (testing "reversing sequential collection"
+    (are [x y] (= x y)
+               [4 3 2 1] (reverse' [1 2 3 4])
+               '(3 1) (reverse' '(1 3))))
+  (testing "reversing string"
+    (is (= '(\y \n \a \m \r \e \g) (reverse' "germany"))))
+  (testing "if coll provided is not a sequence"
+    (is (nil? (reverse' 5))))
+  )
