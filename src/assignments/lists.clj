@@ -37,7 +37,11 @@
    :use          '[loop recur]
    :dont-use     '[reduce]
    :implemented? false}
-  ([f coll] ())
+  ([f collec]
+   (loop [coll (rest collec) result (first collec)]
+     (if (empty? coll)
+       result
+       (recur (rest coll) (f result (first coll))))))
   ([f init coll]))
 
 (defn count'

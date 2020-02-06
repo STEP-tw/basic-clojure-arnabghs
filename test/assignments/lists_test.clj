@@ -19,10 +19,10 @@
                  [2 4] (filter' even? [1 2 3 4])
                  [] (filter' even? [1 3])))
     )
-  ;(testing "reduce"
-  ;  (testing "addition with single coll"
-  ;    (are [x y] (= x y)
-  ;               15 (reduce' + [1 2 3 4 5])
-  ;               0 (reduce' + [])))
-  ;  )
+  (testing "reduce"
+    (testing "addition with single coll"
+      (are [x y] (= x y)
+                 15 (reduce' + [1 2 3 4 5])
+                 '(\a \B \C) (reduce' concat ["a" "B" "C"])))
+    )
   )
