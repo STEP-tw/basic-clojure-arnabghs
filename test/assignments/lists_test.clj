@@ -55,3 +55,11 @@
   (testing "if coll provided is not a sequence"
     (is (nil? (reverse' 5))))
   )
+
+(deftest every-test
+  (testing "sequential collection"
+    (are [x y] (= x y)
+               false (every?' even? [1 2 3 4])
+               true (every?' odd? '(1 3))
+               true (every?' odd? [])))
+  )
