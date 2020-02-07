@@ -97,7 +97,7 @@
      )
    ))
 
-(defn some?'
+(defn some'
   "Implement your own version of some that checks if at least one
   element of a coll satisfies the given predicate. Always return
   a boolean. The original clojure.core/some returns a nil when
@@ -105,8 +105,16 @@
   {:level        :easy
    :use          '[loop recur or]
    :dont-use     '[some]
-   :implemented? false}
-  ([pred coll]))
+   :implemented? true}
+  ([pred' collec]
+   (loop [coll collec
+          result false]
+     (if (or (empty? coll) (true? result))
+       result
+       (recur (rest coll) (or (pred' (first coll)) result))
+       )
+     )
+   ))
 
 (defn ascending?
   "Verify if every element is greater than or equal to its predecessor"

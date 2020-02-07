@@ -63,3 +63,11 @@
                true (every?' odd? '(1 3))
                true (every?' odd? [])))
   )
+
+(deftest some-test
+  (testing "sequential collection"
+    (are [x y] (= x y)
+               true (some' even? [1 2 3 4])
+               false (some' even? '(1 3))
+               false (some' odd? [])))
+  )
